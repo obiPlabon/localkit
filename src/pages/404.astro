@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { liveTools } from '../data/tools';
+---
+<Base title="Page not found" description="That page does not exist. Browse the free tools instead." noindex>
+  <div class="container narrow nf">
+    <p class="eyebrow">404</p>
+    <h1>That page is not here.</h1>
+    <p class="lead">Try one of the tools below, or <a href="/">go to the home page</a>.</p>
+    <div class="cards">{liveTools.slice(0, 6).map((t) => <ToolCard tool={t} />)}</div>
+  </div>
+</Base>
+<style>
+  .nf { padding-block: var(--s-7); }
+  h1 { font-size: var(--text-2xl); margin-top: var(--s-2); }
+  .lead { color: var(--muted); margin-block: var(--s-2) var(--s-5); }
+  .cards { display: grid; gap: var(--s-3); }
+</style>

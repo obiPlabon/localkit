@@ -3,21 +3,47 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
-interface Props { title: string; description?: string }
-const { title, description = site.description } = Astro.props;
+interface Props { title: string; description?: string; noindex?: boolean; type?: 'website' | 'article' }
+const { title, description = site.description, noindex = false, type = 'website' } = Astro.props;
+
+// Brand suffix, unless the title already carries it.
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+// Canonical and social image URLs must be absolute, so they exist only when SITE_URL is configured.
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : undefined;
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161a45" media="(prefers-color-scheme: dark)" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {Astro.site && <link rel="sitemap" href="/sitemap-index.xml" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta property="og:image:alt" content={`${site.name}: ${site.tagline}`} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
     <script is:inline>
       try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
     </script>
-    <title>{title}</title>
+    <slot name="head" />
   </head>
   <body>
     <Header />

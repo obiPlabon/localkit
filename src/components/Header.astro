@@ -1,5 +1,7 @@
 ---
 import { site } from '../data/site';
+import { tools } from '../data/tools';
+const hasRoadmap = tools.some((t) => t.status === 'soon');
 const path = Astro.url.pathname;
 ---
 <header class="site">
@@ -11,7 +13,7 @@ const path = Astro.url.pathname;
     <nav aria-label="Main">
       <a href="/#tools" class:list={{ on: path === '/' }}>Tools</a>
       <a href="/#categories">Categories</a>
-      <a href="/#soon">Roadmap</a>
+      {hasRoadmap && <a href="/#soon">Roadmap</a>}
       <a href="/#faq">FAQ</a>
     </nav>
     <button type="button" class="theme" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">

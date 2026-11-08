@@ -49,6 +49,16 @@ npm run build    # static site in ./dist
 npm run preview  # serve the build locally
 ```
 
+## SEO
+
+Set `SITE_URL` when building for production. It turns on canonical URLs, `og:url`, absolute social image URLs, the sitemap and the `Sitemap:` line in `robots.txt`. Without it those are left out rather than guessed.
+
+```bash
+SITE_URL=https://your-domain.example npm run build
+```
+
+Every tool page gets a unique title and description, Open Graph and Twitter tags, and JSON-LD (`WebApplication`, `BreadcrumbList`, `FAQPage`). The default social image is `public/og.png`; regenerate it with `node scripts/og.mjs`.
+
 ## Project structure
 
 ```text

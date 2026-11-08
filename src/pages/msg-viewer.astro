@@ -2,6 +2,6 @@
 import ToolPage from '../layouts/ToolPage.astro';
 import MailViewer from '../components/MailViewer.svelte';
 ---
-<ToolPage slug="msg-viewer" title="MSG Viewer: open Outlook .msg files online, privately" description="Open and read Outlook .msg email files in your browser. View the message, headers and attachments. Nothing is uploaded.">
+<ToolPage slug="msg-viewer" title="MSG Viewer: open Outlook .msg files online" description="Open and read Outlook .msg email files in your browser. View the message, headers and attachments. Nothing is uploaded.">
   <MailViewer client:only="svelte" accept=".msg,application/vnd.ms-outlook" label="MSG" />
 </ToolPage>
