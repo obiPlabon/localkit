@@ -82,6 +82,7 @@ src/
 1. Add or update its entry in [`src/data/tools.ts`](src/data/tools.ts) and set `status: 'live'`.
 2. Create `src/pages/<slug>.astro` that wraps your component in `ToolPage`.
 3. Keep it client-side: no network calls with user data.
+4. Optionally add `badges: ['featured' | 'hot' | 'new']` to highlight it. Badges show on cards and the tool page, featured tools get a strip on the home page, and the home page can filter by badge.
 
 The home page, search, category lists, footer and counts update automatically.
 

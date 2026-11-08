@@ -1,0 +1,23 @@
+---
+import { badgeInfo, badgeOrder, type Badge } from '../data/tools';
+interface Props { badges?: Badge[] }
+const { badges = [] } = Astro.props;
+const list = badgeOrder.filter((b) => badges.includes(b));
+---
+{list.length > 0 && (
+  <span class="badges">
+    {list.map((b) => (
+      <span class={`badge ${b}`} title={badgeInfo[b].title}>
+        {b === 'featured' && <svg viewBox="0 0 12 12" width="9" height="9" aria-hidden="true"><path d="M6 .8l1.5 3.4 3.7.4-2.8 2.5.8 3.6L6 8.8l-3.2 1.9.8-3.6L.8 4.6l3.7-.4z" fill="currentColor"/></svg>}
+        {badgeInfo[b].label}
+      </span>
+    ))}
+  </span>
+)}
+<style>
+  .badges { display:inline-flex; flex-wrap:wrap; gap:var(--s-1); align-items:center; vertical-align:middle; }
+  .badge { display:inline-flex; align-items:center; gap:.3rem; font:400 .64rem/1 var(--font-mono); text-transform:uppercase; letter-spacing:.08em; padding:.28rem .45rem; border:1px solid transparent; white-space:nowrap; }
+  .badge.featured { background:var(--accent); color:var(--on-accent); }
+  .badge.hot { background:var(--warn-bg); color:var(--warn-text); border-color:color-mix(in srgb, var(--warn-text) 35%, transparent); }
+  .badge.new { background:var(--accent-soft); color:var(--accent); border-color:var(--border-strong); }
+</style>

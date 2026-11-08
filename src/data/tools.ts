@@ -6,6 +6,15 @@ export interface Category {
   blurb: string;
 }
 
+/** Highlights shown as small badges on cards and tool pages. Order here is display order. */
+export type Badge = 'featured' | 'hot' | 'new';
+export const badgeInfo: Record<Badge, { label: string; title: string }> = {
+  featured: { label: 'Featured', title: 'Hand-picked' },
+  hot: { label: 'Hot', title: 'Popular right now' },
+  new: { label: 'New', title: 'Recently added' },
+};
+export const badgeOrder: Badge[] = ['featured', 'hot', 'new'];
+
 export interface Tool {
   slug: string;
   name: string;
@@ -13,6 +22,7 @@ export interface Tool {
   category: CategoryId;
   glyph: string; // 1-4 chars shown on the tile
   status: 'live' | 'soon';
+  badges?: Badge[];
   keywords?: string[];
   faq?: { q: string; a: string }[];
 }
@@ -27,7 +37,7 @@ export const categories: Category[] = [
 
 export const tools: Tool[] = [
   {
-    slug: 'eml-viewer', name: 'EML Viewer', category: 'email', glyph: '.eml', status: 'live',
+    slug: 'eml-viewer', name: 'EML Viewer', category: 'email', glyph: '.eml', status: 'live', badges: ['featured'],
     desc: 'Open .eml files: read the message, headers and attachments.',
     keywords: ['email', 'rfc822', 'mime', 'open eml'],
     faq: [
@@ -37,7 +47,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'msg-viewer', name: 'MSG Viewer', category: 'email', glyph: '.msg', status: 'live',
+    slug: 'msg-viewer', name: 'MSG Viewer', category: 'email', glyph: '.msg', status: 'live', badges: ['featured'],
     desc: 'Open Outlook .msg files: read the message, headers and attachments.',
     keywords: ['outlook', 'email', 'open msg'],
     faq: [
@@ -46,7 +56,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'json-formatter', name: 'JSON Formatter', category: 'dev', glyph: '{ }', status: 'live', desc: 'Pretty-print, minify and validate JSON.',
+    slug: 'json-formatter', name: 'JSON Formatter', category: 'dev', glyph: '{ }', status: 'live', badges: ['hot'], desc: 'Pretty-print, minify and validate JSON.',
     keywords: ['json beautifier', 'json validator', 'minify json'],
     faq: [
       { q: "Is my JSON uploaded?", a: "No. It is parsed and formatted in your browser." },
@@ -109,7 +119,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'image-compressor', name: 'Image Compressor', category: 'media', glyph: 'IMG', status: 'live', desc: 'Shrink JPG, PNG and WebP without uploading.',
+    slug: 'image-compressor', name: 'Image Compressor', category: 'media', glyph: 'IMG', status: 'live', badges: ['hot'], desc: 'Shrink JPG, PNG and WebP without uploading.',
     keywords: ['compress jpg', 'webp', 'resize image'],
     faq: [
       { q: "Are my images uploaded?", a: "No. They are compressed with your browser's canvas, on your device." },
@@ -205,7 +215,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'image-converter', name: 'Image Converter', category: 'media', glyph: 'PNG', status: 'live', desc: 'Convert and resize JPG, PNG, WebP and AVIF.',
+    slug: 'image-converter', name: 'Image Converter', category: 'media', glyph: 'PNG', status: 'live', badges: ['new'], desc: 'Convert and resize JPG, PNG, WebP and AVIF.',
     keywords: ['convert image', 'resize image', 'png to jpg', 'webp to png', 'avif'],
     faq: [
       { q: "Are my images uploaded?", a: "No. Conversion and resizing happen on your device." },
@@ -214,7 +224,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-merge', name: 'Merge PDF', category: 'media', glyph: 'PDF+', status: 'live', desc: 'Combine several PDFs into one.',
+    slug: 'pdf-merge', name: 'Merge PDF', category: 'media', glyph: 'PDF+', status: 'live', badges: ['hot', 'new'], desc: 'Combine several PDFs into one.',
     keywords: ['combine pdf', 'join pdf', 'merge pdf files'],
     faq: [
       { q: "Are my PDFs uploaded?", a: "No. Files are merged in your browser and never leave your device." },
@@ -223,7 +233,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-split', name: 'Split & Edit PDF', category: 'media', glyph: 'PDF', status: 'live', desc: 'Split, extract, delete, reorder and rotate pages.',
+    slug: 'pdf-split', name: 'Split & Edit PDF', category: 'media', glyph: 'PDF', status: 'live', badges: ['new'], desc: 'Split, extract, delete, reorder and rotate pages.',
     keywords: ['split pdf', 'extract pdf pages', 'rotate pdf', 'delete pdf pages', 'reorder pdf'],
     faq: [
       { q: "How do I reorder pages?", a: "Choose Extract / reorder and type the pages in the order you want, for example 3, 1, 2." },
@@ -232,7 +242,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'image-to-pdf', name: 'Image to PDF', category: 'media', glyph: 'IMG→', status: 'live', desc: 'Turn images into a PDF.',
+    slug: 'image-to-pdf', name: 'Image to PDF', category: 'media', glyph: 'IMG→', status: 'live', badges: ['new'], desc: 'Turn images into a PDF.',
     keywords: ['jpg to pdf', 'png to pdf', 'photos to pdf'],
     faq: [
       { q: "Are my images uploaded?", a: "No. The PDF is built on your device." },
@@ -241,7 +251,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-to-images', name: 'PDF to Images', category: 'media', glyph: '→IMG', status: 'live', desc: 'Turn PDF pages into PNG, JPG or WebP.',
+    slug: 'pdf-to-images', name: 'PDF to Images', category: 'media', glyph: '→IMG', status: 'live', badges: ['new'], desc: 'Turn PDF pages into PNG, JPG or WebP.',
     keywords: ['pdf to jpg', 'pdf to png', 'convert pdf'],
     faq: [
       { q: "Is my PDF uploaded?", a: "No. Pages are drawn in your browser." },
@@ -249,7 +259,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'svg-optimizer', name: 'SVG Optimizer', category: 'media', glyph: 'SVG', status: 'live', desc: 'Shrink SVG files with SVGO.',
+    slug: 'svg-optimizer', name: 'SVG Optimizer', category: 'media', glyph: 'SVG', status: 'live', badges: ['new'], desc: 'Shrink SVG files with SVGO.',
     keywords: ['svgo', 'minify svg', 'compress svg'],
     faq: [
       { q: "Will my SVG look different?", a: "Normally not. The preview shows before and after so you can check. Lower the precision only if the result looks off." },
@@ -257,7 +267,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'exif-tool', name: 'EXIF Viewer & Remover', category: 'media', glyph: 'EXIF', status: 'live', desc: 'See and strip hidden photo metadata.',
+    slug: 'exif-tool', name: 'EXIF Viewer & Remover', category: 'media', glyph: 'EXIF', status: 'live', badges: ['new'], desc: 'See and strip hidden photo metadata.',
     keywords: ['exif', 'photo metadata', 'remove gps', 'strip metadata'],
     faq: [
       { q: "What is hidden in a photo?", a: "Often the camera model, the time it was taken, and the GPS location. Sharing the original file shares all of it." },
@@ -268,6 +278,7 @@ export const tools: Tool[] = [
 ];
 
 export const liveTools = tools.filter((t) => t.status === 'live');
+export const withBadge = (b: Badge) => liveTools.filter((t) => t.badges?.includes(b));
 export const getTool = (slug: string) => tools.find((t) => t.slug === slug)!;
 export const byCategory = (id: CategoryId) => tools.filter((t) => t.category === id);
 export const getCategory = (id: CategoryId) => categories.find((c) => c.id === id)!;

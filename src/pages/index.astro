@@ -3,9 +3,11 @@ import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
 import Faq from '../components/Faq.astro';
 import { site } from '../data/site';
-import { categories, tools, liveTools, byCategory } from '../data/tools';
+import { categories, tools, liveTools, byCategory, withBadge, badgeInfo, badgeOrder } from '../data/tools';
 
 const upcoming = tools.filter((t) => t.status === 'soon');
+const featured = withBadge('featured');
+const filters = badgeOrder.map((b) => ({ id: b, label: badgeInfo[b].label, n: withBadge(b).length })).filter((f) => f.n > 0);
 const stats = [
   { n: liveTools.length, l: 'free tools' },
   ...(upcoming.length ? [{ n: upcoming.length, l: 'coming soon' }] : []),
@@ -69,10 +71,26 @@ const ld = [
     </div>
   </section>
 
+  {featured.length > 0 && (
+    <section class="section" id="featured">
+      <div class="container">
+        <h2 class="section-title">Featured.</h2>
+        <p class="section-lead">Hand-picked tools to start with.</p>
+        <div class="cards">{featured.map((t) => <ToolCard tool={t} />)}</div>
+      </div>
+    </section>
+  )}
+
   <section class="section" id="tools">
     <div class="container">
       <h2 class="section-title">Ready to use.</h2>
       <p class="section-lead">Open a tool and start. No install, no sign-up.</p>
+      {filters.length > 0 && (
+        <div class="filters" role="group" aria-label="Filter tools">
+          <button type="button" class="chip on" data-filter="all" aria-pressed="true">All <b>{liveTools.length}</b></button>
+          {filters.map((f) => <button type="button" class="chip" data-filter={f.id} aria-pressed="false">{f.label} <b>{f.n}</b></button>)}
+        </div>
+      )}
       <div class="cards">{liveTools.map((t) => <ToolCard tool={t} />)}</div>
     </div>
   </section>
@@ -123,19 +141,32 @@ const ld = [
 <script>
   const input = document.querySelector<HTMLInputElement>('#q')!;
   const cards = [...document.querySelectorAll<HTMLElement>('#tools [data-tool], #soon [data-tool]')];
+  const featuredSection = document.getElementById('featured');
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  let badge = 'all';
   const empty = document.getElementById('empty')!;
   const sections = [document.getElementById('tools'), document.getElementById('soon')].filter((s): s is HTMLElement => !!s);
   function filter() {
     const q = input.value.trim().toLowerCase();
     let shown = 0;
     for (const c of cards) {
-      const hit = !q || c.dataset.search!.includes(q);
+      const inBadge = badge === 'all' || c.dataset.badges!.split(' ').includes(badge);
+      const hit = inBadge && (!q || c.dataset.search!.includes(q));
       c.hidden = !hit;
       if (hit) shown++;
     }
     empty.hidden = shown > 0;
+    // The featured strip is a shortcut; it steps aside while searching or filtering.
+    if (featuredSection) featuredSection.hidden = !!q || badge !== 'all';
     for (const s of sections) s.hidden = !!q && ![...s.querySelectorAll('[data-tool]')].some((c) => !(c as HTMLElement).hidden) && s.id === 'soon';
   }
+  chips.forEach((b) =>
+    b.addEventListener('click', () => {
+      badge = b.dataset.filter!;
+      chips.forEach((c) => { const on = c === b; c.classList.toggle('on', on); c.setAttribute('aria-pressed', String(on)); });
+      filter();
+    }),
+  );
   function focusSearch() {
     document.getElementById('search')!.scrollIntoView({ block: 'center', behavior: 'smooth' });
     input.focus({ preventScroll: true });
@@ -194,6 +225,12 @@ const ld = [
   .alt { background:var(--surface-2); }
   .cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:var(--s-3); margin-top:var(--s-5); }
   .cards :global([hidden]) { display:none; }
+  #featured { padding-bottom:0; }
+  #featured[hidden] { display:none; }
+  .filters { display:flex; flex-wrap:wrap; gap:var(--s-2); margin-top:var(--s-4); }
+  .filters .chip { cursor:pointer; gap:.5rem; }
+  .filters .chip b { font-weight:400; opacity:.7; }
+  .filters .chip.on { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
   .empty { margin-top:var(--s-3); color:var(--danger); }
 
   .cats { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:var(--s-5); margin-top:var(--s-5); }
