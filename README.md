@@ -51,10 +51,10 @@ npm run preview  # serve the build locally
 
 ## SEO
 
-Set `SITE_URL` when building for production. It turns on canonical URLs, `og:url`, absolute social image URLs, the sitemap and the `Sitemap:` line in `robots.txt`. Without it those are left out rather than guessed.
+The site URL (canonical URLs, `og:url`, social image URLs, the sitemap and the `Sitemap:` line in `robots.txt`) defaults to `https://localkit-3gv.pages.dev`. When a custom domain goes live, set `SITE_URL` in the build settings, or change the default in `astro.config.mjs`.
 
 ```bash
-SITE_URL=https://your-domain.example npm run build
+SITE_URL=https://your-domain.example npm run build   # override the default
 ```
 
 Every tool page gets a unique title and description, Open Graph and Twitter tags, and JSON-LD (`WebApplication`, `BreadcrumbList`, `FAQPage`). The default social image is `public/og.png`; regenerate it with `node scripts/og.mjs`.

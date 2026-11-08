@@ -4,8 +4,8 @@ import svelte from '@astrojs/svelte';
 import sitemap from '@astrojs/sitemap';
 import { fileURLToPath } from 'node:url';
 
-// Set SITE_URL at build time (e.g. https://example.com) to enable canonical URLs, the sitemap and social image URLs.
-const site = process.env.SITE_URL?.replace(/\/+$/, '');
+// Canonical URLs, the sitemap and social image URLs are built from this. Override with SITE_URL once a custom domain is live.
+const site = (process.env.SITE_URL || 'https://localkit-3gv.pages.dev').replace(/\/+$/, '');
 
 // https://astro.build/config
 export default defineConfig({
