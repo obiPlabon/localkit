@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import QrGenerator from '../components/tools/QrGenerator.svelte';
+---
+<ToolPage slug="qr-generator" title="QR Code Generator for links, Wi-Fi and text" description="Make QR codes for links, Wi-Fi and text. Download PNG or SVG. Made on your device.">
+  <QrGenerator client:only="svelte" />
+</ToolPage>

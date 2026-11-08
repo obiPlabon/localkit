@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import JwtDecoder from '../components/tools/JwtDecoder.svelte';
+---
+<ToolPage slug="jwt-decoder" title="JWT Decoder: inspect token headers and claims" description="Decode JSON Web Tokens in your browser. Your token is never sent anywhere.">
+  <JwtDecoder client:only="svelte" />
+</ToolPage>

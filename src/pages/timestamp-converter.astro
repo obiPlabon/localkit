@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import TimestampConverter from '../components/tools/TimestampConverter.svelte';
+---
+<ToolPage slug="timestamp-converter" title="Timestamp Converter: Unix time to date and back" description="Convert Unix timestamps to human dates and back. Seconds, milliseconds and more.">
+  <TimestampConverter client:only="svelte" />
+</ToolPage>

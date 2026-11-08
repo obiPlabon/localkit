@@ -7,6 +7,9 @@ import { fileURLToPath } from 'node:url';
 export default defineConfig({
   integrations: [svelte()],
   vite: {
+    // jSquash resolves its .wasm files relative to its own modules; keep it out of dep pre-bundling.
+    optimizeDeps: { exclude: ['@jsquash/jpeg', '@jsquash/webp', '@jsquash/png', '@jsquash/oxipng', '@jsquash/avif'] },
+    worker: { format: 'es' },
     resolve: {
       alias: {
         // Browser-safe Buffer for iconv-lite (used by the .msg reader).

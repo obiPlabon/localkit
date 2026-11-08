@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import Base64Tool from '../components/tools/Base64Tool.svelte';
+---
+<ToolPage slug="base64" title="Base64 Encoder and Decoder online, privately" description="Encode and decode Base64 text and files in your browser. Nothing is uploaded.">
+  <Base64Tool client:only="svelte" />
+</ToolPage>

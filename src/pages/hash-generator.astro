@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import HashTool from '../components/tools/HashTool.svelte';
+---
+<ToolPage slug="hash-generator" title="Hash Generator: MD5, SHA-1, SHA-256, SHA-512" description="Generate MD5 and SHA hashes for text or files, computed locally.">
+  <HashTool client:only="svelte" />
+</ToolPage>

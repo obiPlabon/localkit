@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import ImageCompressor from '../components/tools/ImageCompressor.svelte';
+---
+<ToolPage slug="image-compressor" title="Image Compressor: shrink JPG and WebP without uploading" description="Compress and resize images in your browser. Your photos are never uploaded.">
+  <ImageCompressor client:only="svelte" />
+</ToolPage>

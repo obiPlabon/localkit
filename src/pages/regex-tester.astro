@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import RegexTester from '../components/tools/RegexTester.svelte';
+---
+<ToolPage slug="regex-tester" title="Regex Tester: test regular expressions with live matches" description="Test JavaScript regular expressions with live highlighting and capture groups.">
+  <RegexTester client:only="svelte" />
+</ToolPage>

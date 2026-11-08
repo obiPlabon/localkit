@@ -13,10 +13,10 @@ without sending anything to a server. No sign-up, no uploads, no limits.
 | :-- | :-- | :-- |
 | EML Viewer | Email | Live |
 | MSG Viewer | Email | Live |
-| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator | Developer | Soon |
-| Word Counter, Case Converter | Text | Soon |
-| Image Compressor, QR Code Generator | Images & files | Soon |
-| Password Generator, Timestamp Converter | Everyday | Soon |
+| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator | Developer | Live |
+| Word Counter, Case Converter | Text | Live |
+| Image Compressor, QR Code Generator | Images & files | Live |
+| Password Generator, Timestamp Converter | Everyday | Live |
 
 The full list lives in [`src/data/tools.ts`](src/data/tools.ts).
 

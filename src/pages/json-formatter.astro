@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import JsonFormatter from '../components/tools/JsonFormatter.svelte';
+---
+<ToolPage slug="json-formatter" title="JSON Formatter: format, minify and validate JSON online" description="Format, minify and validate JSON in your browser. Nothing is uploaded.">
+  <JsonFormatter client:only="svelte" />
+</ToolPage>

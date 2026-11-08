@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import WordCounter from '../components/tools/WordCounter.svelte';
+---
+<ToolPage slug="word-counter" title="Word Counter: words, characters and reading time" description="Count words, characters, sentences and reading time. Your text stays in your browser.">
+  <WordCounter client:only="svelte" />
+</ToolPage>

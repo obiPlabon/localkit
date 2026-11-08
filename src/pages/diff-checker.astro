@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import DiffChecker from '../components/tools/DiffChecker.svelte';
+---
+<ToolPage slug="diff-checker" title="Diff Checker: compare two texts online" description="Compare two texts line by line and see what changed. Runs in your browser.">
+  <DiffChecker client:only="svelte" />
+</ToolPage>
