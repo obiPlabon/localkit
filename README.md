@@ -1,43 +1,80 @@
-# Astro Starter Kit: Minimal
+# Localkit
+
+**Handy tools that never leave your browser.**
+
+Free online tools for developers and everyday work. Open email files, format code and handle daily jobs
+without sending anything to a server. No sign-up, no uploads, no limits.
+
+🔒 Every tool runs locally in your browser. Files and text stay on your device.
+
+## Tools
+
+| Tool | Category | Status |
+| :-- | :-- | :-- |
+| EML Viewer | Email | Live |
+| MSG Viewer | Email | Live |
+| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator | Developer | Soon |
+| Word Counter, Case Converter | Text | Soon |
+| Image Compressor, QR Code Generator | Images & files | Soon |
+| Password Generator, Timestamp Converter | Everyday | Soon |
+
+The full list lives in [`src/data/tools.ts`](src/data/tools.ts).
+
+## Brand
+
+- **Name:** Localkit
+- **Tagline:** Handy tools that never leave your browser.
+- **Voice:** short, plain, upbeat. Headlines are brief and end with a period ("Ready to use.", "Coming next.").
+- **Look:** electric blue (`#1a1af0`) on white, hairline grid, near-square corners, uppercase mono labels. Dark mode is a soft navy.
+- **Fonts:** Space Grotesk (headings), Rubik (body), Space Mono (labels). Self-hosted through `@fontsource`, so the site makes no third-party requests.
+- **Themes:** follows the OS by default, with a manual light/dark toggle in the header.
+
+Full details, tokens and components are in [DESIGN.md](DESIGN.md). The site name is a single value in
+[`src/data/site.ts`](src/data/site.ts).
+
+## Stack
+
+[Astro](https://astro.build) with [Svelte](https://svelte.dev) for interactive tools. Email parsing runs in a Web Worker using
+`postal-mime` (EML) and `@kenjiuno/msgreader` (MSG). Rendered email HTML is sanitized with DOMPurify and shown in a sandboxed iframe;
+remote images are blocked until you choose to load them.
+
+## Getting started
+
+Requires Node 22+.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static site in ./dist
+npm run preview  # serve the build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── data/
+│   ├── site.ts          # name, tagline, description
+│   └── tools.ts         # tool + category registry (drives home, search, footer)
+├── styles/
+│   ├── tokens.css       # design tokens, light and dark
+│   └── global.css       # fonts, primitives (.btn, .chip, .tile, .frame)
+├── layouts/
+│   ├── Base.astro       # page shell, theme bootstrap
+│   └── ToolPage.astro   # template for every tool page
+├── components/          # Header, Footer, ToolCard, Faq, MailViewer
+├── lib/mail/            # EML/MSG parsing, rendering, worker
+└── pages/               # index + one page per tool
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Adding a tool
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. Add or update its entry in [`src/data/tools.ts`](src/data/tools.ts) and set `status: 'live'`.
+2. Create `src/pages/<slug>.astro` that wraps your component in `ToolPage`.
+3. Keep it client-side: no network calls with user data.
 
-Any static assets, like images, can be placed in the `public/` directory.
+The home page, search, category lists, footer and counts update automatically.
 
-## 🧞 Commands
+## Privacy
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+There is no backend. Tools process input with browser APIs and, where needed, Web Workers. Nothing is uploaded, logged or tracked.
