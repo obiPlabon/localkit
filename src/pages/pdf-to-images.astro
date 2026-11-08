@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import PdfToImages from '../components/tools/PdfToImages.svelte';
+---
+<ToolPage slug="pdf-to-images" title="PDF to Image Converter (PNG, JPG, WebP)" description="Convert PDF pages to PNG, JPG or WebP images in your browser. Nothing is uploaded.">
+  <PdfToImages client:only="svelte" />
+</ToolPage>

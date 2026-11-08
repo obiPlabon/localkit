@@ -24,12 +24,23 @@ export interface Result { blob: Blob; width: number; height: number }
 /** Decode, optionally downscale, then encode with the chosen engine. Runs fully on-device. */
 export async function compress(
   file: File,
-  opts: { engine: EngineId; format: Format; quality: number; maxWidth: number },
+  opts: {
+    engine: EngineId; format: Format; quality: number; maxWidth: number;
+    /** Overrides maxWidth: pick the output size from the source size. */
+    size?: (w: number, h: number) => { width: number; height: number };
+  },
 ): Promise<Result> {
   const bmp = await createImageBitmap(file);
-  const scale = opts.maxWidth > 0 && bmp.width > opts.maxWidth ? opts.maxWidth / bmp.width : 1;
-  const width = Math.round(bmp.width * scale);
-  const height = Math.round(bmp.height * scale);
+  let width: number, height: number;
+  if (opts.size) {
+    ({ width, height } = opts.size(bmp.width, bmp.height));
+    width = Math.max(1, Math.round(width));
+    height = Math.max(1, Math.round(height));
+  } else {
+    const scale = opts.maxWidth > 0 && bmp.width > opts.maxWidth ? opts.maxWidth / bmp.width : 1;
+    width = Math.round(bmp.width * scale);
+    height = Math.round(bmp.height * scale);
+  }
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;

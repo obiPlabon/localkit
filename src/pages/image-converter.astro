@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import ImageConverter from '../components/tools/ImageConverter.svelte';
+---
+<ToolPage slug="image-converter" title="Image Converter and Resizer online, privately" description="Convert images between JPG, PNG, WebP and AVIF and resize them in your browser. Nothing is uploaded.">
+  <ImageConverter client:only="svelte" />
+</ToolPage>

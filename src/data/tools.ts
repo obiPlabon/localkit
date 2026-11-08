@@ -204,6 +204,67 @@ export const tools: Tool[] = [
       { q: "Which flavor is supported?", a: "GitHub-flavored Markdown: tables, task lists, strikethrough and fenced code." },
     ],
   },
+  {
+    slug: 'image-converter', name: 'Image Converter', category: 'media', glyph: 'PNG', status: 'live', desc: 'Convert and resize JPG, PNG, WebP and AVIF.',
+    keywords: ['convert image', 'resize image', 'png to jpg', 'webp to png', 'avif'],
+    faq: [
+      { q: "Are my images uploaded?", a: "No. Conversion and resizing happen on your device." },
+      { q: "Which formats can I convert to?", a: "JPEG, WebP, PNG and AVIF. The Browser engine offers JPEG and WebP, and the Advanced engine adds PNG and AVIF." },
+      { q: "What happens to transparency?", a: "PNG, WebP and AVIF keep it. JPEG has no transparency, so it is flattened onto white." },
+    ],
+  },
+  {
+    slug: 'pdf-merge', name: 'Merge PDF', category: 'media', glyph: 'PDF+', status: 'live', desc: 'Combine several PDFs into one.',
+    keywords: ['combine pdf', 'join pdf', 'merge pdf files'],
+    faq: [
+      { q: "Are my PDFs uploaded?", a: "No. Files are merged in your browser and never leave your device." },
+      { q: "Can I change the order?", a: "Yes. Use the arrows to move files up or down before merging." },
+      { q: "Why can't it open my PDF?", a: "Password-protected and damaged files cannot be read. Remove the password first." },
+    ],
+  },
+  {
+    slug: 'pdf-split', name: 'Split & Edit PDF', category: 'media', glyph: 'PDF', status: 'live', desc: 'Split, extract, delete, reorder and rotate pages.',
+    keywords: ['split pdf', 'extract pdf pages', 'rotate pdf', 'delete pdf pages', 'reorder pdf'],
+    faq: [
+      { q: "How do I reorder pages?", a: "Choose Extract / reorder and type the pages in the order you want, for example 3, 1, 2." },
+      { q: "Is my PDF uploaded?", a: "No. Everything runs in your browser." },
+      { q: "What do I get when I split?", a: "A ZIP with one PDF per page, or per group of pages if you split every N." },
+    ],
+  },
+  {
+    slug: 'image-to-pdf', name: 'Image to PDF', category: 'media', glyph: 'IMG→', status: 'live', desc: 'Turn images into a PDF.',
+    keywords: ['jpg to pdf', 'png to pdf', 'photos to pdf'],
+    faq: [
+      { q: "Are my images uploaded?", a: "No. The PDF is built on your device." },
+      { q: "Do phone photos come out upright?", a: "Yes. Photos are decoded first, so their rotation is applied correctly." },
+      { q: "Can I put several images in one PDF?", a: "Yes. Each image gets its own page, in the order shown. Use the arrows to reorder." },
+    ],
+  },
+  {
+    slug: 'pdf-to-images', name: 'PDF to Images', category: 'media', glyph: '→IMG', status: 'live', desc: 'Turn PDF pages into PNG, JPG or WebP.',
+    keywords: ['pdf to jpg', 'pdf to png', 'convert pdf'],
+    faq: [
+      { q: "Is my PDF uploaded?", a: "No. Pages are drawn in your browser." },
+      { q: "Which resolution should I pick?", a: "72 dpi suits screens, 150 dpi is a good default, and 300 dpi is for printing. Higher values make larger files." },
+    ],
+  },
+  {
+    slug: 'svg-optimizer', name: 'SVG Optimizer', category: 'media', glyph: 'SVG', status: 'live', desc: 'Shrink SVG files with SVGO.',
+    keywords: ['svgo', 'minify svg', 'compress svg'],
+    faq: [
+      { q: "Will my SVG look different?", a: "Normally not. The preview shows before and after so you can check. Lower the precision only if the result looks off." },
+      { q: "Why keep the viewBox?", a: "The viewBox lets the image scale. It is kept by default, because removing it stops scaling working." },
+    ],
+  },
+  {
+    slug: 'exif-tool', name: 'EXIF Viewer & Remover', category: 'media', glyph: 'EXIF', status: 'live', desc: 'See and strip hidden photo metadata.',
+    keywords: ['exif', 'photo metadata', 'remove gps', 'strip metadata'],
+    faq: [
+      { q: "What is hidden in a photo?", a: "Often the camera model, the time it was taken, and the GPS location. Sharing the original file shares all of it." },
+      { q: "Does removing metadata reduce quality?", a: "Not for JPEG and PNG. Those are cleaned without re-encoding, so the pixels stay identical." },
+      { q: "Is my photo uploaded?", a: "No. It is read and cleaned on your device." },
+    ],
+  },
 ];
 
 export const liveTools = tools.filter((t) => t.status === 'live');

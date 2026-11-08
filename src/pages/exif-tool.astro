@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import ExifTool from '../components/tools/ExifTool.svelte';
+---
+<ToolPage slug="exif-tool" title="EXIF Viewer and Metadata Remover" description="See the hidden metadata in a photo, including GPS location, and remove it. Runs in your browser.">
+  <ExifTool client:only="svelte" />
+</ToolPage>

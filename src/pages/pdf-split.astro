@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import PdfSplit from '../components/tools/PdfSplit.svelte';
+---
+<ToolPage slug="pdf-split" title="Split, Extract and Rotate PDF Pages" description="Split a PDF, extract or delete pages, reorder and rotate them in your browser. Nothing is uploaded.">
+  <PdfSplit client:only="svelte" />
+</ToolPage>

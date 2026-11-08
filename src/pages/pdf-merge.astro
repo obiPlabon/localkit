@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import PdfMerge from '../components/tools/PdfMerge.svelte';
+---
+<ToolPage slug="pdf-merge" title="Merge PDF files online, privately" description="Combine several PDFs into one in your browser. Your files are never uploaded.">
+  <PdfMerge client:only="svelte" />
+</ToolPage>

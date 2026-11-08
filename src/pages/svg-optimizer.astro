@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import SvgOptimizer from '../components/tools/SvgOptimizer.svelte';
+---
+<ToolPage slug="svg-optimizer" title="SVG Optimizer and Minifier" description="Shrink SVG files with SVGO in your browser, with a before and after preview.">
+  <SvgOptimizer client:only="svelte" />
+</ToolPage>
