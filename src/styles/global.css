@@ -90,7 +90,7 @@ a.chip:hover, button.chip:hover { background: var(--accent-soft); }
 .tk-grid2 { display: grid; gap: var(--s-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 700px) { .tk-grid2 { grid-template-columns: 1fr; } }
 .tk label.lbl, .tk .lbl { display: block; font: 400 var(--text-xs)/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: var(--s-1); }
-.tk textarea, .tk input[type="text"], .tk input[type="number"], .tk input[type="datetime-local"], .tk select {
+.tk textarea, .tk input[type="text"], .tk input[type="number"], .tk input[type="datetime-local"], .tk input[type="date"], .tk input[type="time"], .tk input[type="email"], .tk input[type="url"], .tk input[type="tel"], .tk select {
   width: 100%; font: inherit; color: var(--text); background: var(--bg);
   border: 1px solid var(--border-strong); border-radius: var(--r-md); padding: .6rem .75rem;
 }

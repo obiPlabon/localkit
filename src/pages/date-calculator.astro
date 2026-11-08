@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import DateCalculator from '../components/tools/DateCalculator.svelte';
+---
+<ToolPage slug="date-calculator" title="Date Difference and Age Calculator" description="Count the days between two dates, calculate exact age and next birthday, or add and subtract time from a date.">
+  <DateCalculator client:only="svelte" />
+</ToolPage>

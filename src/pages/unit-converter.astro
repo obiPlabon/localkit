@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import UnitConverter from '../components/tools/UnitConverter.svelte';
+---
+<ToolPage slug="unit-converter" title="Unit Converter: length, weight, temperature and more" description="Convert length, weight, volume, temperature, speed, data size and more, with every unit shown at once.">
+  <UnitConverter client:only="svelte" />
+</ToolPage>

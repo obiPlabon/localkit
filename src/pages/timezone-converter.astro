@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import TimezoneConverter from '../components/tools/TimezoneConverter.svelte';
+---
+<ToolPage slug="timezone-converter" title="Time Zone Converter" description="Convert a date and time between time zones, with daylight saving handled correctly. Add any zone you need.">
+  <TimezoneConverter client:only="svelte" />
+</ToolPage>

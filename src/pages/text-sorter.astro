@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import TextSorter from '../components/tools/TextSorter.svelte';
+---
+<ToolPage slug="text-sorter" title="Text Sorter and Duplicate Line Remover" description="Sort lines, remove duplicates and empty lines, and clean up whitespace in your browser. Nothing is uploaded.">
+  <TextSorter client:only="svelte" />
+</ToolPage>

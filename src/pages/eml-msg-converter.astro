@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import EmlMsgConverter from '../components/tools/EmlMsgConverter.svelte';
+---
+<ToolPage slug="eml-msg-converter" title="EML to MSG and MSG to EML Converter" description="Convert .eml files to Outlook .msg and back in your browser. Attachments are kept. Nothing is uploaded.">
+  <EmlMsgConverter client:only="svelte" />
+</ToolPage>

@@ -11,12 +11,11 @@ without sending anything to a server. No sign-up, no uploads, no limits.
 
 | Tool | Category | Status |
 | :-- | :-- | :-- |
-| EML Viewer | Email | Live |
-| MSG Viewer | Email | Live |
+| EML Viewer, MSG Viewer, Email Header Analyzer, EML ↔ MSG Converter, Email Signature Generator | Email | Live |
 | JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator, URL Encoder, UUID Generator, CSV ↔ JSON, YAML ↔ JSON, Cron Explainer, Color Converter | Developer | Live |
-| Word Counter, Case Converter, Lorem Ipsum Generator, Markdown Preview | Text | Live |
+| Word Counter, Case Converter, Lorem Ipsum Generator, Markdown Preview, Text Sorter | Text | Live |
 | Image Compressor, Image Converter, QR Code Generator, Merge PDF, Split & Edit PDF, Image to PDF, PDF to Images, SVG Optimizer, EXIF Viewer & Remover | Images & files | Live |
-| Password Generator, Timestamp Converter | Everyday | Live |
+| Password Generator, Timestamp Converter, Unit Converter, Percentage & Tip Calculator, Date & Age Calculator, Time Zone Converter, Random Picker | Everyday | Live |
 
 The full list lives in [`src/data/tools.ts`](src/data/tools.ts).
 

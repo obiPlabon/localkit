@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import SignatureGenerator from '../components/tools/SignatureGenerator.svelte';
+---
+<ToolPage slug="email-signature-generator" title="Email Signature Generator" description="Design a clean HTML email signature, preview it, and copy it into Gmail, Outlook or Apple Mail.">
+  <SignatureGenerator client:only="svelte" />
+</ToolPage>

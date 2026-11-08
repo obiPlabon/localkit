@@ -215,7 +215,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'image-converter', name: 'Image Converter', category: 'media', glyph: 'PNG', status: 'live', badges: ['new'], desc: 'Convert and resize JPG, PNG, WebP and AVIF.',
+    slug: 'image-converter', name: 'Image Converter', category: 'media', glyph: 'PNG', status: 'live', desc: 'Convert and resize JPG, PNG, WebP and AVIF.',
     keywords: ['convert image', 'resize image', 'png to jpg', 'webp to png', 'avif'],
     faq: [
       { q: "Are my images uploaded?", a: "No. Conversion and resizing happen on your device." },
@@ -224,7 +224,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-merge', name: 'Merge PDF', category: 'media', glyph: 'PDF+', status: 'live', badges: ['hot', 'new'], desc: 'Combine several PDFs into one.',
+    slug: 'pdf-merge', name: 'Merge PDF', category: 'media', glyph: 'PDF+', status: 'live', badges: ['hot'], desc: 'Combine several PDFs into one.',
     keywords: ['combine pdf', 'join pdf', 'merge pdf files'],
     faq: [
       { q: "Are my PDFs uploaded?", a: "No. Files are merged in your browser and never leave your device." },
@@ -233,7 +233,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-split', name: 'Split & Edit PDF', category: 'media', glyph: 'PDF', status: 'live', badges: ['new'], desc: 'Split, extract, delete, reorder and rotate pages.',
+    slug: 'pdf-split', name: 'Split & Edit PDF', category: 'media', glyph: 'PDF', status: 'live', desc: 'Split, extract, delete, reorder and rotate pages.',
     keywords: ['split pdf', 'extract pdf pages', 'rotate pdf', 'delete pdf pages', 'reorder pdf'],
     faq: [
       { q: "How do I reorder pages?", a: "Choose Extract / reorder and type the pages in the order you want, for example 3, 1, 2." },
@@ -242,7 +242,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'image-to-pdf', name: 'Image to PDF', category: 'media', glyph: 'IMG→', status: 'live', badges: ['new'], desc: 'Turn images into a PDF.',
+    slug: 'image-to-pdf', name: 'Image to PDF', category: 'media', glyph: 'IMG→', status: 'live', desc: 'Turn images into a PDF.',
     keywords: ['jpg to pdf', 'png to pdf', 'photos to pdf'],
     faq: [
       { q: "Are my images uploaded?", a: "No. The PDF is built on your device." },
@@ -251,7 +251,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'pdf-to-images', name: 'PDF to Images', category: 'media', glyph: '→IMG', status: 'live', badges: ['new'], desc: 'Turn PDF pages into PNG, JPG or WebP.',
+    slug: 'pdf-to-images', name: 'PDF to Images', category: 'media', glyph: '→IMG', status: 'live', desc: 'Turn PDF pages into PNG, JPG or WebP.',
     keywords: ['pdf to jpg', 'pdf to png', 'convert pdf'],
     faq: [
       { q: "Is my PDF uploaded?", a: "No. Pages are drawn in your browser." },
@@ -259,7 +259,7 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'svg-optimizer', name: 'SVG Optimizer', category: 'media', glyph: 'SVG', status: 'live', badges: ['new'], desc: 'Shrink SVG files with SVGO.',
+    slug: 'svg-optimizer', name: 'SVG Optimizer', category: 'media', glyph: 'SVG', status: 'live', desc: 'Shrink SVG files with SVGO.',
     keywords: ['svgo', 'minify svg', 'compress svg'],
     faq: [
       { q: "Will my SVG look different?", a: "Normally not. The preview shows before and after so you can check. Lower the precision only if the result looks off." },
@@ -267,12 +267,92 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: 'exif-tool', name: 'EXIF Viewer & Remover', category: 'media', glyph: 'EXIF', status: 'live', badges: ['new'], desc: 'See and strip hidden photo metadata.',
+    slug: 'exif-tool', name: 'EXIF Viewer & Remover', category: 'media', glyph: 'EXIF', status: 'live', desc: 'See and strip hidden photo metadata.',
     keywords: ['exif', 'photo metadata', 'remove gps', 'strip metadata'],
     faq: [
       { q: "What is hidden in a photo?", a: "Often the camera model, the time it was taken, and the GPS location. Sharing the original file shares all of it." },
       { q: "Does removing metadata reduce quality?", a: "Not for JPEG and PNG. Those are cleaned without re-encoding, so the pixels stay identical." },
       { q: "Is my photo uploaded?", a: "No. It is read and cleaned on your device." },
+    ],
+  },
+  {
+    slug: 'unit-converter', name: 'Unit Converter', category: 'everyday', glyph: 'm↔ft', status: 'live', badges: ['new'], desc: 'Length, weight, temperature, data and more.',
+    keywords: ['convert units', 'metric imperial', 'celsius fahrenheit', 'kg to lb', 'km to miles'],
+    faq: [
+      { q: "Which units are covered?", a: "Length, weight, volume, area, temperature, speed, time, data size, pressure and energy." },
+      { q: "Why are there two kinds of megabyte?", a: "MB means 1,000,000 bytes, while MiB means 1,048,576. Both are listed so you can pick the one you need." },
+      { q: "Are gallons US or UK?", a: "Both are available and labelled. Cups, pints and quarts are US measures." },
+    ],
+  },
+  {
+    slug: 'percentage-calculator', name: 'Percentage & Tip Calculator', category: 'everyday', glyph: '%', status: 'live', badges: ['new'], desc: 'Percentages, percent change, tips and bill splitting.',
+    keywords: ['percent of', 'percent change', 'tip calculator', 'split bill', 'discount'],
+    faq: [
+      { q: "How is percent change worked out?", a: "It is (new − old) ÷ |old| × 100, so a rise from 80 to 100 is +25%." },
+      { q: "How do I work out a discount?", a: "Use Add / subtract %, choose Subtract, and enter the price and the discount percent." },
+    ],
+  },
+  {
+    slug: 'date-calculator', name: 'Date & Age Calculator', category: 'everyday', glyph: 'DAYS', status: 'live', badges: ['new'], desc: 'Days between dates, exact age and date arithmetic.',
+    keywords: ['days between dates', 'age calculator', 'add days to date', 'date difference', 'birthday'],
+    faq: [
+      { q: "Is the end date counted?", a: "Not by default. Tick 'Count the end date too' to include both the first and last day." },
+      { q: "What happens with a 29 February birthday?", a: "In years that are not leap years, the birthday is counted on 1 March." },
+      { q: "Are weekdays the same as working days?", a: "Weekdays are Monday to Friday. Public holidays are not taken off." },
+    ],
+  },
+  {
+    slug: 'timezone-converter', name: 'Time Zone Converter', category: 'everyday', glyph: 'UTC', status: 'live', badges: ['new'], desc: 'Convert a time across zones, with daylight saving.',
+    keywords: ['time zones', 'world clock', 'meeting planner', 'utc converter', 'est to gmt'],
+    faq: [
+      { q: "Is daylight saving handled?", a: "Yes. Offsets come from your browser's time zone database, so the result is right for the date you pick." },
+      { q: "Can I add more zones?", a: "Yes. Type a zone name such as Europe/Paris into the box below the results and press Add." },
+      { q: "What if a time does not exist?", a: "During the hour skipped by a daylight saving change, the nearest valid time is used." },
+    ],
+  },
+  {
+    slug: 'random-picker', name: 'Random Picker', category: 'everyday', glyph: 'd6', status: 'live', badges: ['new'], desc: 'Pick names, roll dice, flip coins, draw numbers.',
+    keywords: ['random name picker', 'dice roller', 'coin flip', 'random number generator', 'raffle', 'wheel'],
+    faq: [
+      { q: "Is it really random?", a: "Yes. It uses your browser's secure random generator and avoids the small bias that simple methods have." },
+      { q: "Can I draw several winners without repeats?", a: "Yes. Set how many to pick and keep 'No repeats' ticked." },
+    ],
+  },
+  {
+    slug: 'text-sorter', name: 'Text Sorter', category: 'text', glyph: 'A→Z', status: 'live', badges: ['new'], desc: 'Sort lines, remove duplicates and tidy whitespace.',
+    keywords: ['sort lines', 'remove duplicate lines', 'dedupe', 'alphabetize', 'unique lines'],
+    faq: [
+      { q: "What is natural sort?", a: "It reads digits as numbers, so file2 comes before file10 instead of after it." },
+      { q: "Which duplicate is kept?", a: "The first one. Later copies are removed, and the order of the rest is unchanged until sorting is applied." },
+      { q: "Is my text uploaded?", a: "No. Everything is processed in your browser." },
+    ],
+  },
+  {
+    slug: 'email-header-analyzer', name: 'Email Header Analyzer', category: 'email', glyph: 'HDR', status: 'live', badges: ['new', 'featured'], desc: 'Trace delivery, delays, SPF, DKIM and DMARC.',
+    keywords: ['email headers', 'received headers', 'spf dkim dmarc', 'trace email', 'spoofing', 'phishing'],
+    faq: [
+      { q: "Where do I find the headers?", a: "In Gmail choose ⋮ → Show original. In Outlook choose File → Properties and copy Internet headers. You can also drop an .eml or .msg file." },
+      { q: "Does it check SPF, DKIM and DMARC itself?", a: "No. It reads the results your mail provider wrote into the headers. Verifying them again needs DNS lookups, which would send data off your device." },
+      { q: "Can headers be forged?", a: "Lines added by the sender or by early servers can be. The ones added by your own mail provider, at the top, are the ones to trust." },
+      { q: "Is my email uploaded?", a: "No. The headers are parsed in your browser." },
+    ],
+  },
+  {
+    slug: 'eml-msg-converter', name: 'EML ↔ MSG Converter', category: 'email', glyph: '⇄', status: 'live', badges: ['new', 'featured'], desc: 'Convert .eml to .msg and .msg to .eml.',
+    keywords: ['eml to msg', 'msg to eml', 'outlook converter', 'convert email file'],
+    faq: [
+      { q: "What is kept when converting?", a: "Subject, sender, recipients, dates, plain text and HTML bodies, inline images, attachments and the delivery headers." },
+      { q: "Will the .msg open in Outlook?", a: "The file follows Microsoft's .msg format and reads back correctly, but it has only been checked with open-source readers. If Outlook shows something odd, please report it." },
+      { q: "Is my email uploaded?", a: "No. Conversion happens on your device." },
+    ],
+  },
+  {
+    slug: 'email-signature-generator', name: 'Email Signature Generator', category: 'email', glyph: 'SIG', status: 'live', badges: ['new'], desc: 'Build a clean HTML email signature.',
+    keywords: ['email signature', 'html signature', 'gmail signature', 'outlook signature'],
+    faq: [
+      { q: "How do I add it to Gmail or Outlook?", a: "Click Copy signature, open your signature settings and paste. If formatting is lost, paste the HTML into an HTML signature editor instead." },
+      { q: "Why is my photo missing in Gmail?", a: "Gmail does not show images embedded in a signature. Host the photo online and paste its link into the photo field." },
+      { q: "Does it work in dark mode?", a: "Signatures use dark text and a light layout, which works for most readers. Many clients adjust colors automatically." },
     ],
   },
 ];

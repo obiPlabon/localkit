@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import PercentCalculator from '../components/tools/PercentCalculator.svelte';
+---
+<ToolPage slug="percentage-calculator" title="Percentage and Tip Calculator" description="Work out percentages, percent change, add or subtract a percent, and split a bill with tip. Runs in your browser.">
+  <PercentCalculator client:only="svelte" />
+</ToolPage>

@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import RandomPicker from '../components/tools/RandomPicker.svelte';
+---
+<ToolPage slug="random-picker" title="Random Picker, Dice Roller and Coin Flip" description="Pick random names, roll dice, flip coins or draw random numbers with a secure random generator.">
+  <RandomPicker client:only="svelte" />
+</ToolPage>
