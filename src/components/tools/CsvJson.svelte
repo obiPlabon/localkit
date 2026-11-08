@@ -56,7 +56,7 @@
     <div>
       <div class="tk-row between">
         <label class="lbl" for="cj-in">{mode === 'csv2json' ? 'CSV' : 'JSON'}</label>
-        <input type="file" accept=".csv,.tsv,.json,.txt,text/*" onchange={(e) => onFile(e.currentTarget.files?.[0])} style="max-width:12rem" />
+        <input type="file" accept=".csv,.tsv,.json,.txt,text/*" onchange={(e) => onFile(e.currentTarget.files?.[0])} />
       </div>
       <textarea id="cj-in" bind:value={input} spellcheck="false" placeholder={mode === 'csv2json' ? 'name,age\nAda,36' : '[{"name":"Ada","age":36}]'}></textarea>
     </div>

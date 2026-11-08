@@ -56,7 +56,7 @@ console.log('hi');
     <button class="opt" onclick={() => copy('md', src)}>{copied === 'md' ? 'Copied' : 'Copy Markdown'}</button>
     <button class="opt" onclick={() => copy('html', html)}>{copied === 'html' ? 'Copied' : 'Copy HTML'}</button>
     <button class="opt" onclick={save}>Save .html</button>
-    <input type="file" accept=".md,.markdown,.txt,text/*" onchange={(e) => onFile(e.currentTarget.files?.[0])} style="max-width:12rem" />
+    <input type="file" accept=".md,.markdown,.txt,text/*" onchange={(e) => onFile(e.currentTarget.files?.[0])} />
   </div>
   <div class={view === 'split' ? 'tk-grid2' : ''}>
     {#if view !== 'preview' && view !== 'html'}
