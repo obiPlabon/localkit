@@ -13,8 +13,8 @@ without sending anything to a server. No sign-up, no uploads, no limits.
 | :-- | :-- | :-- |
 | EML Viewer | Email | Live |
 | MSG Viewer | Email | Live |
-| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator | Developer | Live |
-| Word Counter, Case Converter | Text | Live |
+| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator, URL Encoder, UUID Generator, CSV ↔ JSON, YAML ↔ JSON, Cron Explainer, Color Converter | Developer | Live |
+| Word Counter, Case Converter, Lorem Ipsum Generator, Markdown Preview | Text | Live |
 | Image Compressor, QR Code Generator | Images & files | Live |
 | Password Generator, Timestamp Converter | Everyday | Live |
 

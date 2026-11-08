@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import ColorConverter from '../components/tools/ColorConverter.svelte';
+---
+<ToolPage slug="color-converter" title="Color Converter and Contrast Checker" description="Convert HEX, RGB, HSL and OKLCH colors and check WCAG contrast ratios.">
+  <ColorConverter client:only="svelte" />
+</ToolPage>

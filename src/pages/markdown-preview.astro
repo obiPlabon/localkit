@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import MarkdownPreview from '../components/tools/MarkdownPreview.svelte';
+---
+<ToolPage slug="markdown-preview" title="Markdown Previewer and HTML Converter" description="Write Markdown with a live preview and export clean HTML. Nothing is uploaded.">
+  <MarkdownPreview client:only="svelte" />
+</ToolPage>

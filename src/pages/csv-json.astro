@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import CsvJson from '../components/tools/CsvJson.svelte';
+---
+<ToolPage slug="csv-json" title="CSV to JSON and JSON to CSV Converter" description="Convert CSV to JSON and back in your browser. Nothing is uploaded.">
+  <CsvJson client:only="svelte" />
+</ToolPage>

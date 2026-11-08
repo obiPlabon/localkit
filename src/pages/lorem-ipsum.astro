@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import LoremGenerator from '../components/tools/LoremGenerator.svelte';
+---
+<ToolPage slug="lorem-ipsum" title="Lorem Ipsum Generator" description="Generate placeholder paragraphs, sentences or words, right in your browser.">
+  <LoremGenerator client:only="svelte" />
+</ToolPage>

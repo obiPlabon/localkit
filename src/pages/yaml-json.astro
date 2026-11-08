@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import YamlJson from '../components/tools/YamlJson.svelte';
+---
+<ToolPage slug="yaml-json" title="YAML to JSON and JSON to YAML Converter" description="Convert YAML and JSON in both directions in your browser. Nothing is uploaded.">
+  <YamlJson client:only="svelte" />
+</ToolPage>

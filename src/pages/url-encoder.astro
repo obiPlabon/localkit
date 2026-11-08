@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import UrlCodec from '../components/tools/UrlCodec.svelte';
+---
+<ToolPage slug="url-encoder" title="URL Encoder and Decoder online, privately" description="Encode and decode URLs and query strings in your browser. Nothing is uploaded.">
+  <UrlCodec client:only="svelte" />
+</ToolPage>

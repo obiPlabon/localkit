@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import CronExplainer from '../components/tools/CronExplainer.svelte';
+---
+<ToolPage slug="cron-explainer" title="Cron Expression Explainer and Next Run Calculator" description="Translate cron expressions into plain English and see the next run times.">
+  <CronExplainer client:only="svelte" />
+</ToolPage>

@@ -140,6 +140,70 @@ export const tools: Tool[] = [
       { q: "Which timezone is used?", a: "Your local zone, with UTC shown alongside." },
     ],
   },
+  {
+    slug: 'url-encoder', name: 'URL Encoder', category: 'dev', glyph: '%20', status: 'live', desc: 'Encode, decode and break down URLs.',
+    keywords: ['urlencode', 'percent encoding', 'query string'],
+    faq: [
+      { q: "Component or full URL?", a: "Use Component for a single value such as a query parameter. Use Full URL to keep characters like : / ? & intact." },
+      { q: "What happens to a plus sign?", a: "When decoding, + is treated as a space, as in form-encoded query strings." },
+    ],
+  },
+  {
+    slug: 'uuid-generator', name: 'UUID Generator', category: 'dev', glyph: 'ID', status: 'live', desc: 'UUID v4, v7 and ULID, in bulk.',
+    keywords: ['guid', 'ulid', 'uuid v7'],
+    faq: [
+      { q: "Are the IDs truly random?", a: "They use your browser's cryptographically secure random generator." },
+      { q: "v4 or v7?", a: "v4 is fully random. v7 starts with a timestamp, so IDs sort by creation time, which is friendlier to database indexes." },
+    ],
+  },
+  {
+    slug: 'csv-json', name: 'CSV ↔ JSON', category: 'dev', glyph: 'CSV', status: 'live', desc: 'Convert CSV to JSON and back.',
+    keywords: ['csv to json', 'json to csv', 'tsv'],
+    faq: [
+      { q: "Is my data uploaded?", a: "No. Files are read and converted in your browser." },
+      { q: "Are quoted fields supported?", a: "Yes. Quotes, escaped quotes and line breaks inside fields follow RFC 4180." },
+      { q: "What about nested JSON?", a: "Nested objects and arrays are written into the cell as JSON text." },
+    ],
+  },
+  {
+    slug: 'yaml-json', name: 'YAML ↔ JSON', category: 'dev', glyph: 'YML', status: 'live', desc: 'Convert YAML to JSON and back.',
+    keywords: ['yaml to json', 'json to yaml', 'yaml validator'],
+    faq: [
+      { q: "Does it support multiple documents?", a: "Yes. A file with several --- documents is returned as a JSON array." },
+      { q: "Are comments kept?", a: "No. JSON has no comments, so they are dropped when converting." },
+    ],
+  },
+  {
+    slug: 'cron-explainer', name: 'Cron Explainer', category: 'dev', glyph: '* * *', status: 'live', desc: 'Cron expressions in plain English, with next runs.',
+    keywords: ['crontab', 'cron expression', 'cron schedule'],
+    faq: [
+      { q: "Which format is supported?", a: "Standard 5-field cron (minute hour day-of-month month day-of-week), month and day names, and shortcuts like @daily." },
+      { q: "When both day fields are set?", a: "As in classic cron, the job runs when either the day of month or the day of week matches." },
+    ],
+  },
+  {
+    slug: 'color-converter', name: 'Color Converter', category: 'dev', glyph: '#fff', status: 'live', desc: 'HEX, RGB, HSL, OKLCH and contrast checks.',
+    keywords: ['hex to rgb', 'oklch', 'wcag contrast'],
+    faq: [
+      { q: "What contrast ratio do I need?", a: "WCAG AA asks for 4.5:1 for normal text and 3:1 for large text. AAA asks for 7:1 and 4.5:1." },
+      { q: "Is alpha supported?", a: "Yes. 8-digit HEX and rgb()/hsl() with an alpha value are parsed and shown." },
+    ],
+  },
+  {
+    slug: 'lorem-ipsum', name: 'Lorem Ipsum Generator', category: 'text', glyph: 'Lo', status: 'live', desc: 'Placeholder text by paragraph, sentence or word.',
+    keywords: ['dummy text', 'placeholder text'],
+    faq: [
+      { q: "Can I keep the classic opening line?", a: "Yes. Leave 'Start with Lorem ipsum' ticked, or untick it for fully random text." },
+    ],
+  },
+  {
+    slug: 'markdown-preview', name: 'Markdown Preview', category: 'text', glyph: 'MD', status: 'live', desc: 'Live Markdown preview with HTML export.',
+    keywords: ['markdown editor', 'markdown to html'],
+    faq: [
+      { q: "Is the HTML safe?", a: "Output is sanitized, so scripts and unsafe attributes are stripped from the preview and the exported HTML." },
+      { q: "Which flavor is supported?", a: "GitHub-flavored Markdown: tables, task lists, strikethrough and fenced code." },
+    ],
+  },
 ];
 
 export const liveTools = tools.filter((t) => t.status === 'live');
