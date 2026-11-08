@@ -35,15 +35,27 @@ export function renderBody(mail: ParsedMail, allowRemote: boolean): RenderedBody
       if (!a.contentId) continue;
       html = html.split(`cid:${a.contentId}`).join(toDataUri(a.mimeType, a.data));
     }
+    const REMOTE = /^\s*(?:https?:)?\/\//i;
     DOMPurify.addHook('afterSanitizeAttributes', (node) => {
       if (node.tagName === 'A') {
         node.setAttribute('target', '_blank');
         node.setAttribute('rel', 'noopener noreferrer nofollow');
       }
+      // Remote resources: count them and, unless allowed, never hand the URL to the
+      // browser at all. (The CSP would block the load, but Chrome still logs a request attempt.)
+      for (const attr of ['src', 'srcset', 'background']) {
+        const v = node.getAttribute?.(attr);
+        if (v && (attr === 'srcset' ? /(?:^|,)\s*(?:https?:)?\/\//i.test(v) : REMOTE.test(v))) {
+          remoteCount++;
+          if (!allowRemote) {
+            node.removeAttribute(attr);
+            node.setAttribute(`data-blocked-${attr}`, v);
+          }
+        }
+      }
     });
     body = DOMPurify.sanitize(html, { WHOLE_DOCUMENT: false, FORBID_TAGS: ['form', 'meta', 'base', 'link'] });
     DOMPurify.removeAllHooks();
-    remoteCount = (body.match(/(?:src|background|srcset)=["']?\s*https?:/gi) ?? []).length;
   } else {
     body = `<pre>${escapeHtml(mail.text ?? '')}</pre>`;
   }
