@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import ToolCard from '../components/ToolCard.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { categories, tools, liveTools, byCategory } from '../data/tools';
+
+const stats = [
+  { n: liveTools.length, l: 'tools live' },
+  { n: tools.length - liveTools.length, l: 'coming soon' },
+  { n: 0, l: 'bytes uploaded' },
+];
+const tryQueries = ['eml', 'json', 'password', 'qr'];
+const faq = [
+  { q: 'Are my files uploaded?', a: 'No. Every tool runs in your browser. Files and text never leave your device, and there is no server to receive them.' },
+  { q: 'Do I need an account?', a: 'No. There is no sign-up, no paywall and no limit on how often you use a tool.' },
+  { q: 'Does it work offline?', a: 'Once a page has loaded, the tools keep working without a connection, because the processing is local.' },
+  { q: 'Which tools are coming?', a: 'JSON, Base64, JWT, regex, diff, hashing, text and image helpers. See the “Coming next” section above.' },
+];
+const upcoming = tools.filter((t) => t.status === 'soon');
+---
+<Base title={`${site.name}: free online tools that run in your browser`}>
+  <section class="hero frame">
+    <div class="container">
+      <p class="eyebrow">Private online tools</p>
+      <h1>Tools that never<br />leave your browser.</h1>
+      <p class="sub">{site.tagline} Open email files, format code and handle everyday jobs without sending anything to a server.</p>
+      <form class="search" id="search" role="search">
+        <label class="sr-only" for="q">Search tools</label>
+        <input id="q" type="search" placeholder="Search tools: eml, json, password…" autocomplete="off" />
+        <button type="submit" class="key" aria-label="Search">↵</button>
+      </form>
+      <p id="empty" hidden class="empty mono" role="status">No tool matches that. Try another word.</p>
+      <p class="try mono">Try:
+        {tryQueries.map((q) => <button type="button" class="chip" data-try={q}>{q}</button>)}
+      </p>
+      <p class="stats mono">
+        {stats.map((s) => <span><b>{s.n}</b> {s.l}</span>)}
+      </p>
+      <svg class="art" viewBox="0 0 900 250" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <g class="tiles">
+          <path d="M120 150 220 100 320 150 220 200Z"/><path d="M330 150 430 100 530 150 430 200Z"/>
+          <path d="M540 150 640 100 740 150 640 200Z"/><path d="M225 205 325 155 425 205 325 255Z"/>
+          <path d="M435 205 535 155 635 205 535 255Z"/><path d="M15 205 115 155 215 205 115 255Z"/>
+          <path d="M645 205 745 155 845 205 745 255Z"/>
+        </g>
+        <g class="pins">
+          <path d="M180 120v-34M180 86a7 7 0 1 0 .1 0M590 128V80M590 80a7 7 0 1 0 .1 0M270 168v-26M270 142a6 6 0 1 0 .1 0"/>
+        </g>
+        <g class="box">
+          <path d="M430 130 500 92 570 130 500 168Z" class="fill"/><path d="M430 130v26l70 38 70-38v-26M500 168v26"/>
+          <path d="M470 124l12-6M492 130l12-6M514 136l12-6" stroke-dasharray="2 5"/>
+        </g>
+        <path d="M570 130H690V60H640" class="lead"/>
+        <rect x="640" y="44" width="238" height="32" class="tag"/>
+        <text x="652" y="64" class="tagtxt">YOUR FILE STAYS ON-DEVICE</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="tools">
+    <div class="container">
+      <h2 class="section-title">Ready to use.</h2>
+      <p class="section-lead">Open a tool and start. No install, no sign-up.</p>
+      <div class="cards">{liveTools.map((t) => <ToolCard tool={t} />)}</div>
+    </div>
+  </section>
+
+  <section class="section alt" id="categories">
+    <div class="container">
+      <h2 class="section-title">Browse by category.</h2>
+      <div class="cats">
+        {categories.map((c) => (
+          <div class={`cat cat-${c.id}`} id={`cat-${c.id}`}>
+            <h3><span class="dot"></span>{c.name} <small>{byCategory(c.id).length}</small></h3>
+            <p>{c.blurb}</p>
+            <ul>{byCategory(c.id).map((t) => (
+              <li>{t.status === 'live' ? <a href={`/${t.slug}`}>{t.name}</a> : <span class="soon">{t.name} <em>soon</em></span>}</li>
+            ))}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="soon">
+    <div class="container">
+      <h2 class="section-title">Coming next.</h2>
+      <p class="section-lead">The roadmap, in the open.</p>
+      <div class="cards">{upcoming.map((t) => <ToolCard tool={t} />)}</div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container how">
+      <div><span class="n">1</span><h3>Open a tool.</h3><p>Pick what you need. Each tool is a single focused page.</p></div>
+      <div><span class="n">2</span><h3>Drop your file.</h3><p>Files are read by a script on your device. They are not sent anywhere.</p></div>
+      <div><span class="n">3</span><h3>Done.</h3><p>View, copy or download the result. Close the tab and it is gone.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container narrow">
+      <h2 class="section-title">How it works.</h2>
+      <div class="faqwrap"><Faq items={faq} /></div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#q')!;
+  const cards = [...document.querySelectorAll<HTMLElement>('#tools [data-tool], #soon [data-tool]')];
+  const empty = document.getElementById('empty')!;
+  const sections = [document.getElementById('tools')!, document.getElementById('soon')!];
+  function filter() {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    for (const c of cards) {
+      const hit = !q || c.dataset.search!.includes(q);
+      c.hidden = !hit;
+      if (hit) shown++;
+    }
+    empty.hidden = shown > 0;
+    for (const s of sections) s.hidden = !!q && ![...s.querySelectorAll('[data-tool]')].some((c) => !(c as HTMLElement).hidden) && s.id === 'soon';
+  }
+  function focusSearch() {
+    document.getElementById('search')!.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    input.focus({ preventScroll: true });
+  }
+  document.querySelectorAll<HTMLAnchorElement>('a[href$="#search"]').forEach((a) =>
+    a.addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', '/#search'); focusSearch(); }),
+  );
+  if (location.hash === '#search') focusSearch();
+  // Submit (Enter or the button): jump to the first match and focus it.
+  document.getElementById('search')!.addEventListener('submit', (e) => {
+    e.preventDefault();
+    filter();
+    const hits = cards.filter((c) => !c.hidden);
+    const target = hits.find((c) => c.tagName === 'A') ?? hits[0];
+    if (!target) { input.focus(); return; }
+    if (!target.hasAttribute('href')) target.tabIndex = -1;
+    target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    target.focus({ preventScroll: true });
+  });
+  input.addEventListener('input', filter);
+  document.querySelectorAll<HTMLElement>('[data-try]').forEach((b) =>
+    b.addEventListener('click', () => { input.value = b.dataset.try!; filter(); input.focus(); }),
+  );
+  addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== input && !(e.target as HTMLElement).matches('input,textarea')) {
+      e.preventDefault(); focusSearch();
+    }
+  });
+</script>
+
+<style>
+  .hero { padding-block:var(--s-8) 0; text-align:center; border-bottom:1px solid var(--border); overflow:hidden; }
+  .hero h1 { font-size:var(--text-hero); font-weight:400; margin-top:var(--s-4); }
+  .sub { color:var(--muted); max-width:58ch; margin:var(--s-5) auto 0; }
+  .search { position:relative; display:flex; max-width:600px; margin:var(--s-6) auto 0; border:1px solid var(--accent); background:var(--surface); }
+  .search:focus-within { box-shadow:var(--focus); }
+  .search input { flex:1; min-width:0; font:inherit; font-size:var(--text-base); padding:1rem 1.1rem; border:0; background:transparent; color:var(--text); }
+  .search input::placeholder { font:400 var(--text-sm)/1 var(--font-mono); letter-spacing:.04em; color:var(--muted); opacity:.8; }
+  .search input:focus { outline:none; box-shadow:none; }
+  .search .key { cursor:pointer; border-top:0; border-right:0; border-bottom:0; padding:0; display:grid; place-items:center; width:52px; border-left:1px solid var(--accent); background:var(--accent); color:var(--on-accent); font:400 1rem var(--font-mono); }
+  .search .key:hover { background:var(--accent-hover); }
+  .try { margin-top:var(--s-4); color:var(--muted); display:flex; gap:var(--s-2); justify-content:center; align-items:center; flex-wrap:wrap; }
+  .try .chip { cursor:pointer; }
+  .stats { margin-top:var(--s-6); display:flex; justify-content:center; flex-wrap:wrap; gap:var(--s-3) var(--s-6); color:var(--muted); }
+  .stats span { display:flex; gap:var(--s-2); align-items:baseline; }
+  .stats b { font:400 var(--text-xl)/1 var(--font-display); color:var(--accent); letter-spacing:-.02em; text-transform:none; }
+  .art { display:block; width:min(100%, 900px); margin:var(--s-6) auto 0; height:auto; color:var(--border-strong); }
+  .art .tiles path { fill:var(--accent-soft); stroke:var(--border-strong); }
+  .art .pins path { stroke:var(--accent); }
+  .art .box path { stroke:var(--accent); stroke-width:1.4; }
+  .art .box .fill { fill:var(--surface); }
+  .art .lead { stroke:var(--accent); }
+  .art .tag { fill:var(--accent); stroke:none; }
+  .art .tagtxt { fill:var(--on-accent); stroke:none; font:400 12px var(--font-mono); letter-spacing:.08em; }
+
+  .alt { background:var(--surface-2); }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:var(--s-3); margin-top:var(--s-5); }
+  .cards :global([hidden]) { display:none; }
+  .empty { margin-top:var(--s-3); color:var(--danger); }
+
+  .cats { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:var(--s-5); margin-top:var(--s-5); }
+  .cat { scroll-margin-top:84px; }
+  .cat h3 { font-size:var(--text-base); display:flex; align-items:center; gap:var(--s-2); }
+  .cat h3 small { color:var(--muted); font-weight:500; }
+  .cat .dot { width:9px; height:9px; background:var(--tile-fg); }
+  .cat p { color:var(--muted); font-size:var(--text-sm); margin:var(--s-1) 0 var(--s-3); }
+  .cat ul { list-style:none; margin:0; padding:0; display:grid; gap:var(--s-1); font-size:var(--text-sm); }
+  .cat .soon { color:var(--muted); } .cat em { font-style:normal; font-size:var(--text-xs); }
+
+  .how { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:var(--s-6); }
+  .how .n { display:grid; place-items:center; width:34px; height:34px; border:1px solid var(--accent); color:var(--accent); font:400 var(--text-sm) var(--font-mono); margin-bottom:var(--s-3); }
+  .how h3 { font-size:var(--text-lg); } .how p { color:var(--muted); margin-top:var(--s-1); }
+  .faqwrap { margin-top:var(--s-5); }
+  @media (max-width:640px) { .hero { padding-block:var(--s-7) 0; } }
+</style>

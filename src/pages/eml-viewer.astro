@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import MailViewer from '../components/MailViewer.svelte';
+---
+<ToolPage slug="eml-viewer" title="EML Viewer: open .eml files online, privately" description="Open and read .eml email files in your browser. View the message, headers and attachments. Nothing is uploaded.">
+  <MailViewer client:only="svelte" accept=".eml,message/rfc822" label="EML" />
+</ToolPage>

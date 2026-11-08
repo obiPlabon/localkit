@@ -1,0 +1,26 @@
+---
+import type { Tool } from '../data/tools';
+interface Props { tool: Tool }
+const { tool } = Astro.props;
+const live = tool.status === 'live';
+const Tag = live ? 'a' : 'div';
+const search = [tool.name, tool.desc, tool.category, ...(tool.keywords ?? [])].join(' ').toLowerCase();
+---
+<Tag class={`card cat-${tool.category}`} class:list={{ soon: !live }} href={live ? `/${tool.slug}` : undefined} data-tool data-search={search}>
+  <span class="tile">{tool.glyph}</span>
+  <span class="body">
+    <span class="name">{tool.name}{!live && <em>Soon</em>}</span>
+    <span class="desc">{tool.desc}</span>
+  </span>
+</Tag>
+<style>
+  .card { display:flex; gap:var(--s-4); align-items:flex-start; padding:var(--s-4); background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); text-decoration:none; color:var(--text); transition:border-color .15s, box-shadow .15s, transform .15s; }
+  a.card:hover { border-color:var(--accent); box-shadow:var(--shadow-md); color:var(--text); }
+  .card:focus-visible, .card:focus { outline:none; border-color:var(--accent); box-shadow:var(--focus); }
+  .card.soon { background:transparent; border-style:dashed; }
+  .card.soon .tile { opacity:.6; }
+  .body { display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .name { font-family:var(--font-display); font-weight:500; font-size:var(--text-lg); color:var(--heading); display:flex; align-items:center; gap:var(--s-2); }
+  .name em { font:400 var(--text-xs)/1.4 var(--font-mono); text-transform:uppercase; letter-spacing:.06em; color:var(--muted); border:1px solid var(--border-strong); padding:0 6px; }
+  .desc { color:var(--muted); font-size:var(--text-sm); }
+</style>

@@ -1,0 +1,113 @@
+/* Design tokens. Single source of truth. Documented in DESIGN.md.
+   Look: electric-blue on white, hairline grid, square corners, mono labels. */
+:root {
+  color-scheme: light;
+  /* Surfaces */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f4f5ff;
+  /* Text: headings are brand blue, body is deep indigo */
+  --heading: #1a1af0;
+  --text: #1c1f6b;
+  --muted: #5b60ad;
+  /* Lines */
+  --border: #dcdef7;
+  --border-strong: #b3b6ee;
+  /* Brand */
+  --accent: #1a1af0;
+  --accent-hover: #1010c4;
+  --accent-soft: #eceeff;
+  --on-accent: #ffffff;
+  /* Status */
+  --warn-bg: #fff4e0;
+  --warn-text: #7a4100;
+  --danger: #c0261b;
+
+  /* Category tints: one blue family, varied hue */
+  --cat-email-bg: #e7e9ff;    --cat-email-fg: #1a1af0;
+  --cat-dev-bg: #ece6ff;      --cat-dev-fg: #5a2be0;
+  --cat-text-bg: #e2f0ff;     --cat-text-fg: #0a64c8;
+  --cat-media-bg: #e0f6fb;    --cat-media-fg: #0a7a98;
+  --cat-everyday-bg: #e9eaf5; --cat-everyday-fg: #2f3a8f;
+
+  /* Type */
+  --font-display: "Space Grotesk Variable", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Rubik Variable", Rubik, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --text-xs: .72rem;
+  --text-sm: .9rem;
+  --text-base: 1rem;
+  --text-lg: 1.15rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.8rem, 3.2vw, 2.4rem);
+  --text-hero: clamp(2.7rem, 7vw, 4.75rem);
+
+  /* Space (4px base) */
+  --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem;
+  --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 6rem;
+
+  /* Shape: near-square */
+  --r-sm: 2px; --r-md: 3px; --r-lg: 4px; --r-pill: 2px;
+  --shadow-sm: none;
+  --shadow-md: 0 0 0 3px var(--accent-soft);
+
+  /* Layout */
+  --container: 1120px;
+  --container-narrow: 820px;
+  --gutter: clamp(1rem, 4vw, 1.5rem);
+  --focus: 0 0 0 3px rgb(26 26 240 / .3);
+}
+
+/* Dark theme: follows the OS unless the user picked a theme (data-theme on <html>). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #161a45;
+    --surface: #1d2158;
+    --surface-2: #252a69;
+    --heading: #9d9dff;
+    --text: #e6e7ff;
+    --muted: #a9aded;
+    --border: #363d8c;
+    --border-strong: #4d56ad;
+    --accent: #6b6bff;
+    --accent-hover: #9d9dff;
+    --accent-soft: #2a3078;
+    --on-accent: #06061f;
+    --warn-bg: #3a2a0f;
+    --warn-text: #f3c98b;
+    --danger: #ff8b7e;
+    --cat-email-bg: #2a3078;    --cat-email-fg: #9a9aff;
+    --cat-dev-bg: #30287a;      --cat-dev-fg: #b79bff;
+    --cat-text-bg: #1c3a75;     --cat-text-fg: #7ab6ff;
+    --cat-media-bg: #17425a;    --cat-media-fg: #6fd3ee;
+    --cat-everyday-bg: #262c70; --cat-everyday-fg: #9ea8ff;
+    --shadow-md: 0 0 0 3px var(--accent-soft);
+    --focus: 0 0 0 3px rgb(107 107 255 / .45);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #161a45;
+  --surface: #1d2158;
+  --surface-2: #252a69;
+  --heading: #9d9dff;
+  --text: #e6e7ff;
+  --muted: #a9aded;
+  --border: #363d8c;
+  --border-strong: #4d56ad;
+  --accent: #6b6bff;
+  --accent-hover: #9d9dff;
+  --accent-soft: #2a3078;
+  --on-accent: #06061f;
+  --warn-bg: #3a2a0f;
+  --warn-text: #f3c98b;
+  --danger: #ff8b7e;
+  --cat-email-bg: #2a3078;    --cat-email-fg: #9a9aff;
+  --cat-dev-bg: #30287a;      --cat-dev-fg: #b79bff;
+  --cat-text-bg: #1c3a75;     --cat-text-fg: #7ab6ff;
+  --cat-media-bg: #17425a;    --cat-media-fg: #6fd3ee;
+  --cat-everyday-bg: #262c70; --cat-everyday-fg: #9ea8ff;
+  --shadow-md: 0 0 0 3px var(--accent-soft);
+  --focus: 0 0 0 3px rgb(107 107 255 / .45);
+}

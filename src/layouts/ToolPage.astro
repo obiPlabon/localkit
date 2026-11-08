@@ -1,0 +1,39 @@
+---
+import Base from './Base.astro';
+import Faq from '../components/Faq.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getTool, getCategory, tools } from '../data/tools';
+interface Props { slug: string; title: string; description: string }
+const { slug, title, description } = Astro.props;
+const tool = getTool(slug);
+const cat = getCategory(tool.category);
+const related = tools.filter((t) => t.category === tool.category && t.slug !== slug && t.status === 'live').slice(0, 3);
+---
+<Base title={title} description={description}>
+  <div class="container narrow page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Tools</a> / <a href={`/#cat-${cat.id}`}>{cat.name}</a> / <span>{tool.name}</span></nav>
+    <h1>{tool.name}</h1>
+    <p class="lead">{tool.desc}</p>
+    <div class="tool"><slot /></div>
+    <p class="privacy">🔒 Runs entirely in your browser. Nothing is uploaded.</p>
+    {tool.faq && (
+      <section class="block"><h2>Questions.</h2><Faq items={tool.faq} /></section>
+    )}
+    {related.length > 0 && (
+      <section class="block"><h2>More {cat.name.toLowerCase()} tools.</h2>
+        <div class="related">{related.map((t) => <ToolCard tool={t} />)}</div>
+      </section>
+    )}
+  </div>
+</Base>
+<style>
+  .page { padding-block:var(--s-6) 0; }
+  .crumbs { font-size:var(--text-sm); color:var(--muted); margin-bottom:var(--s-4); }
+  .crumbs a { color:var(--muted); text-decoration:none; } .crumbs a:hover { color:var(--accent); }
+  h1 { font-size:var(--text-2xl); }
+  .lead { color:var(--muted); margin-top:var(--s-2); }
+  .tool { margin-top:var(--s-5); background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s-5); }
+  .privacy { margin-top:var(--s-3); color:var(--muted); font-size:var(--text-sm); }
+  .block { margin-top:var(--s-7); } .block h2 { font-size:var(--text-xl); margin-bottom:var(--s-4); }
+  .related { display:grid; gap:var(--s-3); }
+</style>

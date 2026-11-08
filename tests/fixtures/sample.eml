@@ -1,0 +1,34 @@
+From: "Alice Example" <alice@example.com>
+Reply-To: attacker@evil.test
+To: Bob <bob@example.com>
+Subject: =?UTF-8?B?VGVzdCBlbWFpbCDinIUgd2l0aCBhdHRhY2htZW50?=
+Date: Mon, 03 Nov 2025 10:15:00 +0000
+Message-ID: <abc123@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="MIX"
+
+--MIX
+Content-Type: multipart/related; boundary="REL"
+
+--REL
+Content-Type: text/html; charset=utf-8
+
+<h1 style="color:#4f46e5">Hello Bob</h1>
+<p>Inline image: <img alt="dot" src="cid:dot@example.com" width="40"></p>
+<p>Tracker: <img alt="track" src="https://tracker.example.net/pixel.gif"></p>
+<p><a href="https://example.com">A link</a></p>
+<script>alert('xss')</script>
+--REL
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-ID: <dot@example.com>
+Content-Disposition: inline; filename="dot.png"
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==
+--REL--
+--MIX
+Content-Type: text/plain; name="notes.txt"
+Content-Disposition: attachment; filename="notes.txt"
+
+These are my notes.
+--MIX--
