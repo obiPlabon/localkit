@@ -2,20 +2,20 @@
 
 **Handy tools that never leave your browser.**
 
-Free online tools for developers and everyday work. Open email files, format code and handle daily jobs
-without sending anything to a server. No sign-up, no uploads, no limits.
+Free online tools for developers and everyday work: 38 of them, from email viewers and PDF editors to JSON, images and
+calculators. No sign-up, no uploads, no limits.
 
 🔒 Every tool runs locally in your browser. Files and text stay on your device.
 
 ## Tools
 
-| Tool | Category | Status |
-| :-- | :-- | :-- |
-| EML Viewer, MSG Viewer, Email Header Analyzer, EML ↔ MSG Converter, Email Signature Generator | Email | Live |
-| JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator, URL Encoder, UUID Generator, CSV ↔ JSON, YAML ↔ JSON, Cron Explainer, Color Converter | Developer | Live |
-| Word Counter, Case Converter, Lorem Ipsum Generator, Markdown Preview, Text Sorter | Text | Live |
-| Image Compressor, Image Converter, QR Code Generator, Merge PDF, Split & Edit PDF, Image to PDF, PDF to Images, SVG Optimizer, EXIF Viewer & Remover | Images & files | Live |
-| Password Generator, Timestamp Converter, Unit Converter, Percentage & Tip Calculator, Date & Age Calculator, Time Zone Converter, Random Picker | Everyday | Live |
+| Category | Tools |
+| :-- | :-- |
+| **Email** (5) | EML Viewer, MSG Viewer, Email Header Analyzer, EML ↔ MSG Converter, Email Signature Generator |
+| **Developer** (12) | JSON Formatter, Base64, JWT Decoder, Regex Tester, Diff Checker, Hash Generator, URL Encoder, UUID Generator, CSV ↔ JSON, YAML ↔ JSON, Cron Explainer, Color Converter |
+| **Text** (5) | Word Counter, Case Converter, Lorem Ipsum Generator, Markdown Preview, Text Sorter |
+| **Images & files** (9) | Image Compressor, Image Converter, QR Code Generator, Merge PDF, Split & Edit PDF, Image to PDF, PDF to Images, SVG Optimizer, EXIF Viewer & Remover |
+| **Everyday** (7) | Password Generator, Timestamp Converter, Unit Converter, Percentage & Tip Calculator, Date & Age Calculator, Time Zone Converter, Random Picker |
 
 The full list lives in [`src/data/tools.ts`](src/data/tools.ts).
 
@@ -33,9 +33,17 @@ Full details, tokens and components are in [DESIGN.md](DESIGN.md). The site name
 
 ## Stack
 
-[Astro](https://astro.build) with [Svelte](https://svelte.dev) for interactive tools. Email parsing runs in a Web Worker using
-`postal-mime` (EML) and `@kenjiuno/msgreader` (MSG). Rendered email HTML is sanitized with DOMPurify and shown in a sandboxed iframe;
-remote images are blocked until you choose to load them.
+[Astro](https://astro.build) (static output) with [Svelte 5](https://svelte.dev) for the interactive tools. There is no server, so
+every dependency below runs in the browser.
+
+| Area | Libraries |
+| :-- | :-- |
+| Email | `postal-mime` (EML), `@kenjiuno/msgreader` (MSG), a small OLE writer for `.msg` output. Parsing runs in a Web Worker. Email HTML is sanitized with DOMPurify and shown in a sandboxed iframe, with remote images blocked until you allow them. |
+| Images | Canvas for the Browser engine. [jSquash](https://github.com/jamsinclair/jSquash) WASM codecs (MozJPEG, libwebp, OxiPNG, AVIF) in a Web Worker for the Advanced engine, loaded on demand. `exifr` reads metadata. |
+| PDF | `pdf-lib` to merge, split, rotate and build PDFs. `pdfjs-dist` to render pages. |
+| Other | `svgo` (SVG), `yaml`, `marked` + DOMPurify (Markdown), `qrcode-generator`. Hashes use WebCrypto plus a small MD5. |
+
+The WASM and worker files are bundled into `dist/`, so the deployed site makes no third-party requests.
 
 ## Getting started
 
@@ -47,6 +55,8 @@ npm run dev      # http://localhost:4321
 npm run build    # static site in ./dist
 npm run preview  # serve the build locally
 ```
+
+To keep a dev server running in the background, use `astro dev --background` (manage it with `astro dev stop`, `status` and `logs`).
 
 ## SEO
 
@@ -64,16 +74,23 @@ Every tool page gets a unique title and description, Open Graph and Twitter tags
 src/
 ├── data/
 │   ├── site.ts          # name, tagline, description
-│   └── tools.ts         # tool + category registry (drives home, search, footer)
+│   └── tools.ts         # tool + category registry, badges (drives home, search, footer, SEO)
 ├── styles/
 │   ├── tokens.css       # design tokens, light and dark
-│   └── global.css       # fonts, primitives (.btn, .chip, .tile, .frame)
+│   └── global.css       # fonts, primitives (.btn, .chip, .tile) and shared tool controls (.tk)
 ├── layouts/
-│   ├── Base.astro       # page shell, theme bootstrap
-│   └── ToolPage.astro   # template for every tool page
-├── components/          # Header, Footer, ToolCard, Faq, MailViewer
-├── lib/mail/            # EML/MSG parsing, rendering, worker
-└── pages/               # index + one page per tool
+│   ├── Base.astro       # page shell, meta tags, theme bootstrap
+│   └── ToolPage.astro   # template for every tool page (breadcrumbs, FAQ, JSON-LD)
+├── components/
+│   ├── tools/           # one Svelte component per tool
+│   └── …                # Header, Footer, ToolCard, Badges, Faq, MailViewer
+├── lib/
+│   ├── mail/            # EML/MSG parsing and building, header analysis, worker
+│   ├── image/           # compression engines and encode worker
+│   ├── pdf/             # pdf.js helper, page-range parsing
+│   └── tools/           # pure logic: csv, cron, color, units, time zones, zip, …
+└── pages/               # index, 404, robots.txt, and one page per tool
+scripts/og.mjs           # renders public/og.png
 ```
 
 ## Adding a tool
